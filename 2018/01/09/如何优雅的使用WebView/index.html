@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="Leason&#39;s Blog">
 <meta property="og:description" content="WiebView 是Android开发中经常会用到的功能，是一个基于webkit引擎，用于显示来自本地、服务器web页面的控件，可以很好的提升应用扩展性。有以下优点：   可以直接显示和渲染web页面 webview可以直接用html文件（网络上或本地assets中）作布局 和JavaScript交互调用   基本使用方法在 安卓开发文档 中已经做了相关的详细介绍，这里主要根据日常开发中需求，整理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T06:41:40.502Z">
+<meta property="og:updated_time" content="2018-01-09T08:24:58.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅的使用WebView">
 <meta name="twitter:description" content="WiebView 是Android开发中经常会用到的功能，是一个基于webkit引擎，用于显示来自本地、服务器web页面的控件，可以很好的提升应用扩展性。有以下优点：   可以直接显示和渲染web页面 webview可以直接用html文件（网络上或本地assets中）作布局 和JavaScript交互调用   基本使用方法在 安卓开发文档 中已经做了相关的详细介绍，这里主要根据日常开发中需求，整理">
@@ -103,7 +103,7 @@
     root: '/',
     scheme: 'Mist',
     version: '5.1.3',
-    sidebar: {"position":"left","display":"remove","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -370,7 +370,7 @@
       
 
       
-        <p><a href="https://developer.android.com/reference/android/webkit/WebView.html" target="_blank" rel="noopener"><strong>WiebView</strong></a> 是Android开发中经常会用到的功能，是一个基于webkit引擎，用于显示来自本地、服务器web页面的控件，可以很好的提升应用扩展性。有以下优点：</p>
+        <p><a href="https://developer.android.google.cn/reference/android/webkit/WebView.html" target="_blank" rel="noopener"><strong>WiebView</strong></a> 是Android开发中经常会用到的功能，是一个基于webkit引擎，用于显示来自本地、服务器web页面的控件，可以很好的提升应用扩展性。有以下优点：</p>
 <blockquote>
 <ul>
 <li>可以直接显示和渲染web页面</li>
@@ -378,14 +378,14 @@
 <li>和JavaScript交互调用</li>
 </ul>
 </blockquote>
-<p>基本使用方法在 <a href="https://developer.android.com/reference/android/webkit/WebView.html" target="_blank" rel="noopener"><strong>安卓开发文档</strong></a> 中已经做了相关的详细介绍，这里主要根据日常开发中需求，整理了以下3个方面。</p>
+<p>基本使用方法在 <a href="https://developer.android.google.cn/reference/android/webkit/WebView.html" target="_blank" rel="noopener"><strong>安卓开发文档</strong></a> 中已经做了相关的详细介绍，这里主要根据日常开发中需求，整理了以下3个方面。</p>
 <a id="more"></a>
 <h3 id="一、处理web页面中的图片点击事件"><a href="#一、处理web页面中的图片点击事件" class="headerlink" title="一、处理web页面中的图片点击事件"></a>一、处理web页面中的图片点击事件</h3><p>在应用中使用 <strong>WebView</strong> 加载网页进行显示的时候，多数情况下都要进行内容适配，这会导致图片进行一定比例的缩小，在手机上看起来模糊，影响用户体验。我们可以提取出网页中的关键图片添加点击事件，然后对图片进行自定义处理，比如：放大、旋转等。</p>
 <h4 id="1-定义JavaScript接口类"><a href="#1-定义JavaScript接口类" class="headerlink" title="1.定义JavaScript接口类"></a>1.定义JavaScript接口类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaScriptInterface</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Context context;</span><br><span class="line">    </span><br><span class="line">    JavaScriptInterface(Context context) &#123;</span><br><span class="line">        <span class="keyword">this</span>.context = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//点击图片的回调方法</span></span><br><span class="line">    <span class="comment">//必须添加JavascriptInterface注解,否则无法响应</span></span><br><span class="line">    <span class="meta">@JavascriptInterface</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">openImage</span><span class="params">(String img)</span> </span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">        <span class="comment">//这里获取到的是图片地址</span></span><br><span class="line">        intent.putExtra(<span class="string">"image"</span>, img);</span><br><span class="line">        <span class="comment">//跳转到图片处理页面</span></span><br><span class="line">        intent.setClass(context, ImageActivity.class);</span><br><span class="line">        context.startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="2-在WebView中添加JavascriptInterface"><a href="#2-在WebView中添加JavascriptInterface" class="headerlink" title="2.在WebView中添加JavascriptInterface"></a>2.在WebView中添加JavascriptInterface</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JavaScriptInterface javascriptInterface = <span class="keyword">new</span> JavaScriptInterface(context);</span><br><span class="line">webview.addJavascriptInterface(javascriptInterface, <span class="string">"imagelistener"</span>);</span><br></pre></td></tr></table></figure>
 <h4 id="3-新建图片遍历和处理的方法"><a href="#3-新建图片遍历和处理的方法" class="headerlink" title="3.新建图片遍历和处理的方法"></a>3.新建图片遍历和处理的方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addImageClickListener</span><span class="params">(WebView view)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 遍历所有的img节点,添加onclick函数，函数的功能是在图片点击的时候调用本地java接口并传递url过去</span></span><br><span class="line">        view.loadUrl(<span class="string">"javascript:(function()&#123;"</span> +</span><br><span class="line">                <span class="string">"var objs = document.getElementsByTagName(\"img\"); "</span> +</span><br><span class="line">                <span class="string">"for(var i=0;i&lt;objs.length;i++)  "</span> +</span><br><span class="line">                <span class="string">"&#123;"</span></span><br><span class="line">                + <span class="string">"    objs[i].onclick=function()  "</span> +</span><br><span class="line">                <span class="string">"    &#123;  "</span></span><br><span class="line">                + <span class="string">"        window.imagelistner.openImage(this.src);  "</span> +</span><br><span class="line">                <span class="string">"    &#125;  "</span> +</span><br><span class="line">                <span class="string">"&#125;"</span> +</span><br><span class="line">                <span class="string">"&#125;)()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//循环遍历接收到的数据,提取出带有”img”标签的内容,设置它的宽度占屏幕的100%，图片自适应</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">imgReset</span><span class="params">(WebView view)</span> </span>&#123;</span><br><span class="line">        view.loadUrl(<span class="string">"javascript:(function()&#123;"</span> +</span><br><span class="line">                <span class="string">"var objs = document.getElementsByTagName('img'); "</span> +</span><br><span class="line">                <span class="string">"for(var i=0;i&lt;objs.length;i++)  "</span> +</span><br><span class="line">                <span class="string">"&#123;"</span></span><br><span class="line">                + <span class="string">"var img = objs[i];   "</span></span><br><span class="line">                + <span class="string">"    img.style.maxWidth = '100%';   "</span></span><br><span class="line">                + <span class="string">"    img.style.height = 'auto';   "</span></span><br><span class="line">                + <span class="string">"&#125;"</span> +</span><br><span class="line">                <span class="string">"&#125;)()"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="4-设置WebViewClient"><a href="#4-设置WebViewClient" class="headerlink" title="4.设置WebViewClient"></a>4.设置WebViewClient</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">webview.setWebViewClient(<span class="keyword">new</span> WebViewClient() &#123;</span><br><span class="line">            <span class="comment">//复写shouldOverrideUrlLoading()方法，设置打开网页时不调用系统浏览器， 直接在WebView中显示</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(WebView view, String url)</span> </span>&#123;</span><br><span class="line">                view.loadUrl(url);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageFinished</span><span class="params">(WebView view, String url)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">super</span>.onPageFinished(view, url);</span><br><span class="line">                <span class="comment">// html加载完成之后，添加监听图片的点击js函数</span></span><br><span class="line">                addImageClickListner(view);</span><br><span class="line">                imgReset(view);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        webView.loadData(<span class="string">"&lt;!DOCTYPE html&gt;&lt;title&gt;&lt;/title&gt;"</span>, <span class="string">"text/html"</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
-<p>至此， <strong>WebView</strong>  加载的网页中，图片点击事件处理已经完成。需要注意的是，使用此方法来允许JavaScript控制主机应用程序。这是一个强大的功能，但也为面向JELLY_BEAN或更早版本的应用程序提供安全风险。如果应用程序在运行Android 4.2的设备上运行，那么定位比<a href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#JELLY_BEAN" target="_blank" rel="noopener">JELLY_BEAN</a>更晚的版本的应用程序仍然存在漏洞。使用此方法的最安全的方法是将<a href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#JELLY_BEAN_MR1" target="_blank" rel="noopener">JELLY_BEAN_MR1</a>作为目标，并确保只有在Android 4.2或更高版本上运行时才会调用该方法。</p>
+<p>至此， <strong>WebView</strong>  加载的网页中，图片点击事件处理已经完成。需要注意的是，使用此方法来允许JavaScript控制主机应用程序。这是一个强大的功能，但也为面向JELLY_BEAN或更早版本的应用程序提供安全风险。如果应用程序在运行Android 4.2的设备上运行，那么定位比<a href="https://developer.android.google.cn/reference/android/os/Build.VERSION_CODES.html#JELLY_BEAN" target="_blank" rel="noopener">JELLY_BEAN</a>更晚的版本的应用程序仍然存在漏洞。使用此方法的最安全的方法是将<a href="https://developer.android.google.cn/reference/android/os/Build.VERSION_CODES.html#JELLY_BEAN_MR1" target="_blank" rel="noopener">JELLY_BEAN_MR1</a>作为目标，并确保只有在Android 4.2或更高版本上运行时才会调用该方法。</p>
 <p>使用这些较旧的版本，JavaScript可以使用反射来访问注入对象的公共字段。在包含非信任内容的  <strong>WebView</strong>  中使用此方法可能允许攻击者以非预期的方式操纵主机应用程序，并使用主机应用程序的权限执行Java代码。在可能包含不可信内容的  <strong>WebView</strong>  中使用此方法时要格外小心。</p>
 <h3 id="二、实现web文件下载功能"><a href="#二、实现web文件下载功能" class="headerlink" title="二、实现web文件下载功能"></a>二、实现web文件下载功能</h3><p> <strong>WebView</strong>  控制网页在应用中进行显示的时候，如果碰到下载链接，点击将不会有任何效果，这是因为默认状态下 <strong>WebView</strong> 没有开启文件下载的功能，如果要实现文件下载的功能，需要设置WebView的DownloadListener，自己实现DownloadListener的接口来达到文件的下载。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DownloadListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDownloadStart</span><span class="params">(String url, String userAgent,</span></span></span><br><span class="line"><span class="function"><span class="params">            String contentDisposition, String mimetype, <span class="keyword">long</span> contentLength)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -432,7 +432,7 @@
 <p>请注意Android7.0以后权限机制进行了调整，为了提高文件访问的安全性，限制了应用通过file://方式直接对外提供文件路径的功能，向应用外部提供这种uri会直接导致应用崩溃。替代方案是使用FileProvider通过content://方式提供这些uri，并进行临时访问授权，对应的目录要在xml中注册才行。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">private</span> Intent <span class="title">getFileIntent</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        Uri uri = Uri.fromFile(file);</span><br><span class="line">        String type = getMIMEType(file);</span><br><span class="line">        Log.i(<span class="string">"tag"</span>, <span class="string">"type="</span> + type);</span><br><span class="line">        <span class="comment">//判断是否是Android N(7.0)以及更高版本</span></span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</span><br><span class="line">        intent.addCategory(<span class="string">"android.intent.category.DEFAULT"</span>);</span><br><span class="line">        <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">24</span>) &#123;</span><br><span class="line">            <span class="comment">//关于FileProvider的相关配置，这里就不做介绍</span></span><br><span class="line">            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">            Uri contentUri = FileProvider.getUriForFile(mContext, <span class="string">"XXX.YYYY.ZZ.fileProvider"</span>, file);</span><br><span class="line">            intent.setDataAndType(contentUri, type);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">            intent.setDataAndType(uri, type);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> intent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取文件类型</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">getMIMEType</span><span class="params">(File f)</span> </span>&#123;</span><br><span class="line">        String type = <span class="string">""</span>;</span><br><span class="line">        String fName = f.getName();</span><br><span class="line">      <span class="comment">/* 取得扩展名 */</span></span><br><span class="line">        String end = fName.substring(fName.lastIndexOf(<span class="string">"."</span>) + <span class="number">1</span>, fName.length()).toLowerCase();</span><br><span class="line">      <span class="comment">/* 依扩展名的类型决定MimeType */</span></span><br><span class="line">        <span class="keyword">switch</span> (end) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"pdf"</span>:</span><br><span class="line">                type = <span class="string">"application/pdf"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"m4a"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"mp3"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"mid"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"xmf"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"ogg"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"wav"</span>:</span><br><span class="line">                type = <span class="string">"audio/*"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"3gp"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"mp4"</span>:</span><br><span class="line">                type = <span class="string">"video/*"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"jpg"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"gif"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"png"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"jpeg"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"bmp"</span>:</span><br><span class="line">                type = <span class="string">"image/*"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"apk"</span>:</span><br><span class="line">        <span class="comment">/* android.permission.INSTALL_PACKAGES */</span></span><br><span class="line">                type = <span class="string">"application/vnd.android.package-archive"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"pptx"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"ppt"</span>:</span><br><span class="line">                type = <span class="string">"application/vnd.ms-powerpoint"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"docx"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"doc"</span>:</span><br><span class="line">                type = <span class="string">"application/msword"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"xlsx"</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"xls"</span>:</span><br><span class="line">                type = <span class="string">"application/vnd.ms-excel"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">         <span class="comment">/*如果无法直接打开，就跳出软件列表给用户选择 */</span></span><br><span class="line">                type = <span class="string">"*/*"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> type;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="三、处理web页面的弹框"><a href="#三、处理web页面的弹框" class="headerlink" title="三、处理web页面的弹框"></a>三、处理web页面的弹框</h3><p>每个web页面都会有自己的逻辑，其中涉及到弹框的处理，默认情况下，<strong>Android WebView</strong>是不支持 <strong>js</strong> 的Alert(),Confirm(),Prompt()函数的弹出提示框，需要我们设置<a href="https://developer.android.com/reference/android/webkit/WebChromeClient.html" target="_blank" rel="noopener">WebChromeClient</a> 对象来完成。这里我们可以分为以下两种情况来讨论。</p>
+<h3 id="三、处理web页面的弹框"><a href="#三、处理web页面的弹框" class="headerlink" title="三、处理web页面的弹框"></a>三、处理web页面的弹框</h3><p>每个web页面都会有自己的逻辑，其中涉及到弹框的处理，默认情况下，<strong>Android WebView</strong>是不支持 <strong>js</strong> 的Alert(),Confirm(),Prompt()函数的弹出提示框，需要我们设置<a href="https://developer.android.google.cn/reference/android/webkit/WebChromeClient.html" target="_blank" rel="noopener">WebChromeClient</a> 对象来完成。这里我们可以分为以下两种情况来讨论。</p>
 <h4 id="1-不对弹框进行任何处理"><a href="#1-不对弹框进行任何处理" class="headerlink" title="1.不对弹框进行任何处理"></a>1.不对弹框进行任何处理</h4><p>这种很简单，直接设置就行</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webView.setWebChromeClient(<span class="keyword">new</span> WebChromeClient());</span><br></pre></td></tr></table></figure>
 <h4 id="2-处理弹框样式"><a href="#2-处理弹框样式" class="headerlink" title="2.处理弹框样式"></a>2.处理弹框样式</h4><p>重写WebChromeClient的下列方法</p>
@@ -534,6 +534,124 @@
 
 
         </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pics.jpg"
+                alt="Leason" />
+            
+              <p class="site-author-name" itemprop="name">Leason</p>
+              <p class="site-description motion-element" itemprop="description">松花酿酒，春水煎茶。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、处理web页面中的图片点击事件"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x5904;&#x7406;web&#x9875;&#x9762;&#x4E2D;&#x7684;&#x56FE;&#x7247;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;" class="headerlink" title="&#x4E00;&#x3001;&#x5904;&#x7406;web&#x9875;&#x9762;&#x4E2D;&#x7684;&#x56FE;&#x7247;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;"></a>&#x4E00;&#x3001;&#x5904;&#x7406;web&#x9875;&#x9762;&#x4E2D;&#x7684;&#x56FE;&#x7247;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定义JavaScript接口类"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#1-&#x5B9A;&#x4E49;JavaScript&#x63A5;&#x53E3;&#x7C7B;" class="headerlink" title="1.&#x5B9A;&#x4E49;JavaScript&#x63A5;&#x53E3;&#x7C7B;"></a>1.&#x5B9A;&#x4E49;JavaScript&#x63A5;&#x53E3;&#x7C7B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在WebView中添加JavascriptInterface"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#2-&#x5728;WebView&#x4E2D;&#x6DFB;&#x52A0;JavascriptInterface" class="headerlink" title="2.&#x5728;WebView&#x4E2D;&#x6DFB;&#x52A0;JavascriptInterface"></a>2.&#x5728;WebView&#x4E2D;&#x6DFB;&#x52A0;JavascriptInterface</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-新建图片遍历和处理的方法"><span class="nav-number">1.3.</span> <span class="nav-text"><a href="#3-&#x65B0;&#x5EFA;&#x56FE;&#x7247;&#x904D;&#x5386;&#x548C;&#x5904;&#x7406;&#x7684;&#x65B9;&#x6CD5;" class="headerlink" title="3.&#x65B0;&#x5EFA;&#x56FE;&#x7247;&#x904D;&#x5386;&#x548C;&#x5904;&#x7406;&#x7684;&#x65B9;&#x6CD5;"></a>3.&#x65B0;&#x5EFA;&#x56FE;&#x7247;&#x904D;&#x5386;&#x548C;&#x5904;&#x7406;&#x7684;&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-设置WebViewClient"><span class="nav-number">1.4.</span> <span class="nav-text"><a href="#4-&#x8BBE;&#x7F6E;WebViewClient" class="headerlink" title="4.&#x8BBE;&#x7F6E;WebViewClient"></a>4.&#x8BBE;&#x7F6E;WebViewClient</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、实现web文件下载功能"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x5B9E;&#x73B0;web&#x6587;&#x4EF6;&#x4E0B;&#x8F7D;&#x529F;&#x80FD;" class="headerlink" title="&#x4E8C;&#x3001;&#x5B9E;&#x73B0;web&#x6587;&#x4EF6;&#x4E0B;&#x8F7D;&#x529F;&#x80FD;"></a>&#x4E8C;&#x3001;&#x5B9E;&#x73B0;web&#x6587;&#x4EF6;&#x4E0B;&#x8F7D;&#x529F;&#x80FD;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-实现DownloadListener接口"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#1-&#x5B9E;&#x73B0;DownloadListener&#x63A5;&#x53E3;" class="headerlink" title="1.&#x5B9E;&#x73B0;DownloadListener&#x63A5;&#x53E3;"></a>1.&#x5B9E;&#x73B0;DownloadListener&#x63A5;&#x53E3;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-新建DownloaderTask-继承AsyncTask并重写其方法"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#2-&#x65B0;&#x5EFA;DownloaderTask-&#x7EE7;&#x627F;AsyncTask&#x5E76;&#x91CD;&#x5199;&#x5176;&#x65B9;&#x6CD5;" class="headerlink" title="2.&#x65B0;&#x5EFA;DownloaderTask &#x7EE7;&#x627F;AsyncTask&#x5E76;&#x91CD;&#x5199;&#x5176;&#x65B9;&#x6CD5;"></a>2.&#x65B0;&#x5EFA;DownloaderTask &#x7EE7;&#x627F;AsyncTask&#x5E76;&#x91CD;&#x5199;&#x5176;&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-写入文件到本地和打开文件的方法"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#3-&#x5199;&#x5165;&#x6587;&#x4EF6;&#x5230;&#x672C;&#x5730;&#x548C;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x7684;&#x65B9;&#x6CD5;" class="headerlink" title="3.&#x5199;&#x5165;&#x6587;&#x4EF6;&#x5230;&#x672C;&#x5730;&#x548C;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x7684;&#x65B9;&#x6CD5;"></a>3.&#x5199;&#x5165;&#x6587;&#x4EF6;&#x5230;&#x672C;&#x5730;&#x548C;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x7684;&#x65B9;&#x6CD5;</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-写入文件到本地"><span class="nav-number">2.3.1.</span> <span class="nav-text"><a href="#3-1-&#x5199;&#x5165;&#x6587;&#x4EF6;&#x5230;&#x672C;&#x5730;" class="headerlink" title="3.1 &#x5199;&#x5165;&#x6587;&#x4EF6;&#x5230;&#x672C;&#x5730;"></a>3.1 &#x5199;&#x5165;&#x6587;&#x4EF6;&#x5230;&#x672C;&#x5730;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-打开文件"><span class="nav-number">2.3.2.</span> <span class="nav-text"><a href="#3-2-&#x6253;&#x5F00;&#x6587;&#x4EF6;" class="headerlink" title="3.2 &#x6253;&#x5F00;&#x6587;&#x4EF6;"></a>3.2 &#x6253;&#x5F00;&#x6587;&#x4EF6;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、处理web页面的弹框"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x5904;&#x7406;web&#x9875;&#x9762;&#x7684;&#x5F39;&#x6846;" class="headerlink" title="&#x4E09;&#x3001;&#x5904;&#x7406;web&#x9875;&#x9762;&#x7684;&#x5F39;&#x6846;"></a>&#x4E09;&#x3001;&#x5904;&#x7406;web&#x9875;&#x9762;&#x7684;&#x5F39;&#x6846;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-不对弹框进行任何处理"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#1-&#x4E0D;&#x5BF9;&#x5F39;&#x6846;&#x8FDB;&#x884C;&#x4EFB;&#x4F55;&#x5904;&#x7406;" class="headerlink" title="1.&#x4E0D;&#x5BF9;&#x5F39;&#x6846;&#x8FDB;&#x884C;&#x4EFB;&#x4F55;&#x5904;&#x7406;"></a>1.&#x4E0D;&#x5BF9;&#x5F39;&#x6846;&#x8FDB;&#x884C;&#x4EFB;&#x4F55;&#x5904;&#x7406;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-处理弹框样式"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#2-&#x5904;&#x7406;&#x5F39;&#x6846;&#x6837;&#x5F0F;" class="headerlink" title="2.&#x5904;&#x7406;&#x5F39;&#x6846;&#x6837;&#x5F0F;"></a>2.&#x5904;&#x7406;&#x5F39;&#x6846;&#x6837;&#x5F0F;</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
     </main>
