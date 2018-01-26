@@ -284,8 +284,8 @@ a {
   word-wrap: break-word;
 }
 a:hover {
-  color: #222;
-  border-bottom-color: #222;
+  color: #495a80;
+  border-bottom-color: #495a80;
 }
 blockquote {
   margin: 0;
@@ -301,13 +301,13 @@ hr {
   margin: 40px 0;
   height: 3px;
   border: none;
-  background-color: #ddd;
+  background-color: #fff;
   background-image: repeating-linear-gradient(-45deg, #fff, #fff 4px, transparent 4px, transparent 8px);
 }
 blockquote {
   padding: 0 15px;
   color: #666;
-  border-left: 4px solid #ddd;
+  border-left: 4px solid #fff;
 }
 blockquote cite::before {
   content: "-";
@@ -403,7 +403,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  border: 1px solid #ddd;
+  border: 1px solid #fff;
   font-size: 14px;
   table-layout: fixed;
   word-wrap: break-all;
@@ -424,7 +424,7 @@ td {
 }
 th,
 td {
-  border-bottom: 3px solid #ddd;
+  border-bottom: 3px solid #fff;
   border-right: 1px solid #eee;
 }
 th {
@@ -907,16 +907,16 @@ pre .javascript .function {
 }
 .post-body .tabs ul.nav-tabs li.tab.active {
   border-top: 3px solid #fc6423;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
   background-color: #fff;
 }
 @media (max-width: 413px) {
   .post-body .tabs ul.nav-tabs li.tab.active {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #fff;
     border-left: 3px solid #fc6423;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
   }
 }
 .post-body .tabs ul.nav-tabs li.tab.active a {
@@ -927,7 +927,7 @@ pre .javascript .function {
   background-color: #fff;
 }
 .post-body .tabs .tab-content .tab-pane {
-  border: 1px solid #ddd;
+  border: 1px solid #fff;
   padding: 20px 20px 0 20px;
 }
 .post-body .tabs .tab-content .tab-pane:not(.active) {
@@ -952,9 +952,9 @@ pre .javascript .function {
   line-height: 2;
 }
 .btn:hover {
-  border-color: #222;
+  border-color: #495a80;
   color: #fff;
-  background: #222;
+  background: #495a80;
 }
 .btn +.btn {
   margin: 0 0 8px 8px;
@@ -1011,7 +1011,7 @@ pre .javascript .function {
 .pagination .prev:hover,
 .pagination .next:hover,
 .pagination .page-number:hover {
-  border-top-color: #222;
+  border-top-color: #495a80;
 }
 .pagination .space {
   padding: 0;
@@ -1043,7 +1043,7 @@ pre .javascript .function {
   .pagination .prev:hover,
   .pagination .next:hover,
   .pagination .page-number:hover {
-    border-bottom-color: #222;
+    border-bottom-color: #495a80;
   }
 }
 .comments {
@@ -1064,7 +1064,7 @@ pre .javascript .function {
   z-index: 1050;
   padding: 0 6px;
   width: 24px;
-  background: #222;
+  background: #495a80;
   font-size: 12px;
   opacity: 0.6;
   color: #fff;
@@ -1097,7 +1097,7 @@ pre .javascript .function {
 }
 .headband {
   height: 3px;
-  background: #222;
+  background: #495a80;
 }
 .site-meta {
   margin: 0;
@@ -1113,7 +1113,7 @@ pre .javascript .function {
   display: inline-block;
   padding: 0 40px;
   color: #fff;
-  background: #222;
+  background: #495a80;
   border-bottom: none;
 }
 .brand:hover {
@@ -1136,7 +1136,7 @@ pre .javascript .function {
 .site-subtitle {
   margin-top: 10px;
   font-size: 13px;
-  color: #ddd;
+  color: #fff;
 }
 .use-motion .brand {
   opacity: 0;
@@ -1171,7 +1171,7 @@ pre .javascript .function {
     margin: 0 -10px;
     padding: 0 10px;
     clear: both;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #fff;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -1211,7 +1211,7 @@ pre .javascript .function {
 }
 .menu .menu-item a:hover,
 .menu-item-active a {
-  border-bottom-color: #222;
+  border-bottom-color: #495a80;
 }
 .menu .menu-item .fa {
   margin-right: 5px;
@@ -1330,7 +1330,7 @@ pre .javascript .function {
   box-sizing: border-box;
   margin: auto;
   padding: 3px;
-  border: 1px solid #ddd;
+  border: 1px solid #fff;
 }
 .posts-expand .post-body .fancybox img {
   margin: 0 auto 25px;
@@ -1422,7 +1422,7 @@ pre .javascript .function {
   border-bottom-color: #666;
 }
 .posts-collapse .post-header:hover::before {
-  background: #222;
+  background: #495a80;
 }
 .posts-collapse .post-meta {
   position: absolute;
@@ -1582,7 +1582,7 @@ pre .javascript .function {
   border-bottom: none;
 }
 .post-nav-item a:hover {
-  color: #222;
+  color: #495a80;
   border-bottom: none;
 }
 .post-nav-item a:active {
@@ -1674,7 +1674,7 @@ pre .javascript .function {
   width: 0;
   z-index: 1040;
   box-shadow: inset 0 2px 6px #000;
-  background: #222;
+  background: #495a80;
   -webkit-transform: translateZ(0);
 }
 .sidebar a {
@@ -1714,7 +1714,7 @@ pre .javascript .function {
   width: 14px;
   height: 14px;
   padding: 5px;
-  background: #222;
+  background: #495a80;
   line-height: 0;
   z-index: 1050;
   cursor: pointer;
@@ -1793,7 +1793,7 @@ img:hover {
 .site-author-name {
   margin: 0;
   text-align: center;
-  color: #222;
+  color: #495a80;
   font-weight: 600;
 }
 .site-description {
@@ -1934,7 +1934,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d2ff1f;
+  background: #1cd7bd;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2864,7 +2864,7 @@ img:hover {
 .site-meta {
   padding: 20px 0;
   color: #fff;
-  background: #222;
+  background: #495a80;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .site-meta {
@@ -2996,7 +2996,7 @@ img:hover {
   color: #555;
 }
 .sidebar a:hover {
-  color: #222;
+  color: #495a80;
 }
 .site-state-item {
   padding: 0 10px;
