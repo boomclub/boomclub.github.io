@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.leason.top/"/>
-  <updated>2018-03-07T05:16:50.992Z</updated>
+  <updated>2018-03-13T01:58:50.287Z</updated>
   <id>http://www.leason.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ASP调用WebService服务接口</title>
+    <link href="http://www.leason.top/2018/03/12/ASP%E8%B0%83%E7%94%A8WebService%E6%9C%8D%E5%8A%A1%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://www.leason.top/2018/03/12/ASP调用WebService服务接口/</id>
+    <published>2018-03-12T08:26:29.000Z</published>
+    <updated>2018-03-13T01:58:50.287Z</updated>
+    
+    <content type="html"><![CDATA[<p>什么是WebService?</p><p>Web service是一个平台独立的，低耦合的，自包含的、基于可编程的web的应用程序，可使用开放的XML（标准通用标记语言下的一个子集）标准来描述、发布、发现、协调和配置这些应用程序，用于开发分布式的互操作的应用程序。</p><p>今天遇到一个项目，要在一个较老的系统（ASP写的）上面做功能集成，所以需要使用ASP来调用WebService的接口，网上关于这方面的资料很少，只有自己动手了。</p><p>相较于其它语言，通过ASP来访问接口的过程可能会稍微复杂一点，主要就是SOAP和XML的编写。推荐一个比较偷懒的方法，可以通过ReadyAPI（以前是SoapUI）直接获取，这款软件专门用于WebService接口的相关测试。</p><a id="more"></a><p>接口调用都大同小异，就使用项目中的接口举例。首先在ReadyAPI上新建项目，在Request的Form中输入需要的参数点击运行即可，然后切换到XML界面，就可以得到需要的信息。<br><img src="http://p1ns9jwhz.bkt.clouddn.com/webService.png" alt=""></p><p>接下来编写ASP请求即可：</p><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;% </span><br><span class="line">Dim Url, strXml, XMLHTTP, xmlResponse </span><br><span class="line">Url= <span class="string">"接口地址"</span> </span><br><span class="line">strXml = <span class="string">"&lt;?xml version="</span><span class="string">"1.0"</span><span class="string">"?&gt;"</span></span><br><span class="line"><span class="comment">//编写SOAP信息，基本结构一定要有，否则无法被Java识别</span></span><br><span class="line">strXml = strXml&amp;<span class="string">"&lt;soapenv:Envelope xmlns:soapenv="</span><span class="string">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="string">" xmlns:web="</span><span class="string">"http://webService.core.jawave.com/"</span><span class="string">"&gt;"</span></span><br><span class="line">strXml = strXml&amp;<span class="string">"&lt;soapenv:Header/&gt;"</span></span><br><span class="line">strXml = strXml&amp;<span class="string">"&lt;soapenv:Body&gt;"</span></span><br><span class="line"><span class="comment">//接口中指定调用的方法</span></span><br><span class="line">strXml = strXml&amp;<span class="string">"&lt;web:createUser&gt;"</span></span><br><span class="line"><span class="comment">//接口需要的参数，这里是Json字符串</span></span><br><span class="line">strXml = strXml&amp;<span class="string">"&lt;web:userJsonString&gt;&#123;"</span><span class="string">" userId "</span><span class="string">": "</span><span class="string">"zhangsan"</span><span class="string">","</span><span class="string">"userName"</span><span class="string">":"</span><span class="string">"张三"</span><span class="string">","</span><span class="string">"emailAddress"</span><span class="string">":"</span><span class="string">"aa@163.com"</span><span class="string">","</span><span class="string">" perCode "</span><span class="string">":"</span><span class="string">"jawave"</span><span class="string">"&#125; &lt;/web:userJsonString&gt;"</span></span><br><span class="line">strXml = strXml&amp;<span class="string">"&lt;/web:createUser&gt;"</span></span><br><span class="line">strXml = strXml&amp;<span class="string">"&lt;/soapenv:Body&gt;"</span></span><br><span class="line">strXml = strXml&amp;<span class="string">"&lt;/soapenv:Envelope&gt;"</span></span><br><span class="line"><span class="comment">//输出参数，便于参看</span></span><br><span class="line">response.write strXml&amp;<span class="string">"&lt;/br&gt;&lt;/br&gt;"</span> </span><br><span class="line"><span class="comment">//创建MS的XMLHTTP组件 </span></span><br><span class="line">Set XMLHTTP = server.CreateObject(<span class="string">"MSXML2.ServerXMLHTTP"</span>) </span><br><span class="line">XMLHTTP.Open <span class="string">"post"</span>,Url,<span class="keyword">false</span> </span><br><span class="line">XMLHTTP.setrequestheader <span class="string">"content-length "</span>,len(strXml) </span><br><span class="line">XMLHTTP.setrequestheader <span class="string">"content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span> </span><br><span class="line"><span class="comment">//发送信息到url </span></span><br><span class="line">XMLHTTP.send strXml </span><br><span class="line">If XMLHTTP.readystate &lt;&gt; <span class="number">4</span> then </span><br><span class="line">  xmlResponse = <span class="string">"xml error"</span> </span><br><span class="line">Else </span><br><span class="line"><span class="comment">//服务器返回的信息 </span></span><br><span class="line">  xmlResponse = XMLHTTP.responseText </span><br><span class="line">End If </span><br><span class="line">Set XMLHTTP = Nothing </span><br><span class="line"><span class="keyword">if</span> err.number &lt;&gt; <span class="number">0</span> then </span><br><span class="line">  xmlResponse = <span class="string">"error "</span> </span><br><span class="line">  err.clear </span><br><span class="line">end If</span><br><span class="line"><span class="comment">//输出结果</span></span><br><span class="line">Response.Write xmlResponse </span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;什么是WebService?&lt;/p&gt;
+&lt;p&gt;Web service是一个平台独立的，低耦合的，自包含的、基于可编程的web的应用程序，可使用开放的XML（标准通用标记语言下的一个子集）标准来描述、发布、发现、协调和配置这些应用程序，用于开发分布式的互操作的应用程序。&lt;/p&gt;
+&lt;p&gt;今天遇到一个项目，要在一个较老的系统（ASP写的）上面做功能集成，所以需要使用ASP来调用WebService的接口，网上关于这方面的资料很少，只有自己动手了。&lt;/p&gt;
+&lt;p&gt;相较于其它语言，通过ASP来访问接口的过程可能会稍微复杂一点，主要就是SOAP和XML的编写。推荐一个比较偷懒的方法，可以通过ReadyAPI（以前是SoapUI）直接获取，这款软件专门用于WebService接口的相关测试。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="开发" scheme="http://www.leason.top/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="ASP" scheme="http://www.leason.top/tags/ASP/"/>
+    
+      <category term="WebService" scheme="http://www.leason.top/tags/WebService/"/>
+    
+  </entry>
   
   <entry>
     <title>Sophix Demo-Android热更新</title>
