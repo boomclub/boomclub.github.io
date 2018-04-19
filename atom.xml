@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.leason.top/"/>
-  <updated>2018-03-13T01:58:50.287Z</updated>
+  <updated>2018-04-19T04:34:55.801Z</updated>
   <id>http://www.leason.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>四月</title>
+    <link href="http://www.leason.top/2018/04/19/%E5%9B%9B%E6%9C%88/"/>
+    <id>http://www.leason.top/2018/04/19/四月/</id>
+    <published>2018-04-19T03:36:21.000Z</published>
+    <updated>2018-04-19T04:34:55.801Z</updated>
+    
+    <content type="html"><![CDATA[<p>大约是每年这个时候，都有一部分人离职<br>来来去去<br>良禽择木，不管是自我救赎还是环境压迫<br>离开都不会是终点，而是新的起点。</p><p>代码写多了后，看待事物的逻辑都会觉得甚是简单。<br>或如final永恒不变，或如var反复无常。</p><a id="more"></a><p>如果一开始就能看清所有事多好，厌恶的绝不触碰，喜欢的就深深刻在血液里，这样的生活就能轻松多了。</p><p>最近沉迷绝地求生，在没有接触这个游戏前，任何源于它的消息我都嗤之以鼻，不就是个你跑我追的捉迷藏游戏，有啥可玩的啊。</p><p>然而谁能想到我是如此的立场不坚，现在每天下班都必须得玩个几小时。</p><p>是什么让我如此着迷？<br>是可以无所顾忌的冲刺拼杀<br>是可以随意决定的游戏方式<br>是可以重头来过的生命历程</p><p>人都是生而自由，然活不自由的。<br>小时候可以无忧无虑，随着年龄的增长都会有不同的桎梏，有时候不得不选择放弃某些事或人。</p><p>我对代码的热情会冰消云散吗？<br>目前是不会的，且希望永远不会。<br>当对一件事物投入足够多的关注和感情后，不论是主动或者被动的抽离，都如同丢了一缕灵魂。</p><p>我希望我的灵魂是丰富完美的。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;大约是每年这个时候，都有一部分人离职&lt;br&gt;来来去去&lt;br&gt;良禽择木，不管是自我救赎还是环境压迫&lt;br&gt;离开都不会是终点，而是新的起点。&lt;/p&gt;
+&lt;p&gt;代码写多了后，看待事物的逻辑都会觉得甚是简单。&lt;br&gt;或如final永恒不变，或如var反复无常。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://www.leason.top/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="心情" scheme="http://www.leason.top/tags/%E5%BF%83%E6%83%85/"/>
+    
+      <category term="生活" scheme="http://www.leason.top/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>ASP调用WebService服务接口</title>
