@@ -84,20 +84,20 @@
 
 
 
-<meta name="description" content="一.简介为什么要用Spring Boot？因为简洁，简单。 Spring系列发展到现在 ，如果一个新接触的开发者想要使用 spring 技术，需要一个一个的搞配置，然后还有个版本兼容性问题，非常麻烦，就算是老手偶尔都会踩坑。而 Spring Boot 就是来解决这个问题的，完全可以先不关心如何配置，做到快速启动开发进行业务逻辑编写，各种需要的技术，加入 starter 配置就行，开发速度大大提高.">
+<meta name="description" content="一.目的这篇博客主要是简单讲一下如何使用SpringBoot来实现RESTful web service。什么是RESTful？就是一种设计风格，由一组架构约束条件和原则组成，从客户端到服务器的每个请求都必须包含理解请求所必需的信息。 看文字有点晦涩，但对程序员来说，看到代码一下就能明白了（毕竟上面比较专业的描述，都是百度来的）。">
 <meta name="keywords" content="Java,SpringBoot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot(一)：创建第一个工程">
-<meta property="og:url" content="http://www.leason.top/2018/07/17/SpringBoot-一-：创建第一个工程/index.html">
+<meta property="og:title" content="SpringBoot(二)：构建RESTful Web服务">
+<meta property="og:url" content="http://www.leason.top/2018/07/25/SpringBoot-二-：构建RESTful Web服务/index.html">
 <meta property="og:site_name" content="Leason&#39;s Blog">
-<meta property="og:description" content="一.简介为什么要用Spring Boot？因为简洁，简单。 Spring系列发展到现在 ，如果一个新接触的开发者想要使用 spring 技术，需要一个一个的搞配置，然后还有个版本兼容性问题，非常麻烦，就算是老手偶尔都会踩坑。而 Spring Boot 就是来解决这个问题的，完全可以先不关心如何配置，做到快速启动开发进行业务逻辑编写，各种需要的技术，加入 starter 配置就行，开发速度大大提高.">
+<meta property="og:description" content="一.目的这篇博客主要是简单讲一下如何使用SpringBoot来实现RESTful web service。什么是RESTful？就是一种设计风格，由一组架构约束条件和原则组成，从客户端到服务器的每个请求都必须包含理解请求所必需的信息。 看文字有点晦涩，但对程序员来说，看到代码一下就能明白了（毕竟上面比较专业的描述，都是百度来的）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/20180717114849.jpg">
-<meta property="og:updated_time" content="2018-07-20T09:43:35.023Z">
+<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/20187261330.jpeg">
+<meta property="og:updated_time" content="2018-07-26T05:31:16.273Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringBoot(一)：创建第一个工程">
-<meta name="twitter:description" content="一.简介为什么要用Spring Boot？因为简洁，简单。 Spring系列发展到现在 ，如果一个新接触的开发者想要使用 spring 技术，需要一个一个的搞配置，然后还有个版本兼容性问题，非常麻烦，就算是老手偶尔都会踩坑。而 Spring Boot 就是来解决这个问题的，完全可以先不关心如何配置，做到快速启动开发进行业务逻辑编写，各种需要的技术，加入 starter 配置就行，开发速度大大提高.">
-<meta name="twitter:image" content="http://p1ns9jwhz.bkt.clouddn.com/20180717114849.jpg">
+<meta name="twitter:title" content="SpringBoot(二)：构建RESTful Web服务">
+<meta name="twitter:description" content="一.目的这篇博客主要是简单讲一下如何使用SpringBoot来实现RESTful web service。什么是RESTful？就是一种设计风格，由一组架构约束条件和原则组成，从客户端到服务器的每个请求都必须包含理解请求所必需的信息。 看文字有点晦涩，但对程序员来说，看到代码一下就能明白了（毕竟上面比较专业的描述，都是百度来的）。">
+<meta name="twitter:image" content="http://p1ns9jwhz.bkt.clouddn.com/20187261330.jpeg">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://www.leason.top/2018/07/17/SpringBoot-一-：创建第一个工程/"/>
+  <link rel="canonical" href="http://www.leason.top/2018/07/25/SpringBoot-二-：构建RESTful Web服务/"/>
 
 
 
 
 
-  <title>SpringBoot(一)：创建第一个工程 | Leason's Blog</title>
+  <title>SpringBoot(二)：构建RESTful Web服务 | Leason's Blog</title>
   
 
 
@@ -280,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.leason.top/2018/07/17/SpringBoot-一-：创建第一个工程/">
+    <link itemprop="mainEntityOfPage" href="http://www.leason.top/2018/07/25/SpringBoot-二-：构建RESTful Web服务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Leason">
@@ -297,7 +297,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">SpringBoot(一)：创建第一个工程</h2>
+          <h2 class="post-title" itemprop="name headline">SpringBoot(二)：构建RESTful Web服务</h2>
         
 
         <div class="post-meta">
@@ -309,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T09:39:02+08:00">
-                2018-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-25T15:03:44+08:00">
+                2018-07-25
               </time>
             
 
@@ -349,7 +349,7 @@
 
           
           
-             <span id="/2018/07/17/SpringBoot-一-：创建第一个工程/" class="leancloud_visitors" data-flag-title="SpringBoot(一)：创建第一个工程">
+             <span id="/2018/07/25/SpringBoot-二-：构建RESTful Web服务/" class="leancloud_visitors" data-flag-title="SpringBoot(二)：构建RESTful Web服务">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -383,9 +383,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://p1ns9jwhz.bkt.clouddn.com/20180717114849.jpg" rel="gallery_cjk0s9mzc00000gh1p45jlli6"
+                 href="http://p1ns9jwhz.bkt.clouddn.com/20187261330.jpeg" rel="gallery_cjk0sc40a0000vwh1fildj8us"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://p1ns9jwhz.bkt.clouddn.com/20180717114849.jpg" itemprop="contentUrl"/>
+                <img src="http://p1ns9jwhz.bkt.clouddn.com/20187261330.jpeg" itemprop="contentUrl"/>
               </a>
             
           
@@ -396,57 +396,45 @@
       
 
       
-        <h3 id="一-简介"><a href="#一-简介" class="headerlink" title="一.简介"></a>一.简介</h3><p>为什么要用Spring Boot？因为简洁，简单。</p>
-<p>Spring系列发展到现在 ，如果一个新接触的开发者想要使用 spring 技术，需要一个一个的搞配置，然后还有个版本兼容性问题，非常麻烦，就算是老手偶尔都会踩坑。而 Spring Boot 就是来解决这个问题的，完全可以先不关心如何配置，做到快速启动开发进行业务逻辑编写，各种需要的技术，加入 starter 配置就行，开发速度大大提高.</p>
-<p>诚然，如果是个技术爱好者要追根究底，也可以从Spring最开始入门，让头发变得更少一点，而不是“开袋即食”。</p>
+        <h3 id="一-目的"><a href="#一-目的" class="headerlink" title="一.目的"></a>一.目的</h3><p>这篇博客主要是简单讲一下如何使用SpringBoot来实现RESTful web service。什么是RESTful？就是一种设计风格，由一组架构约束条件和原则组成，从客户端到服务器的每个请求都必须包含理解请求所必需的信息。</p>
+<p>看文字有点晦涩，但对程序员来说，看到代码一下就能明白了（毕竟上面比较专业的描述，都是百度来的）。</p>
 <a id="more"></a>
-<h3 id="二-创建工程"><a href="#二-创建工程" class="headerlink" title="二.创建工程"></a>二.创建工程</h3><ul>
-<li>打开IDEA</li>
-<li>New Project 选择 Spring Initializr</li>
-<li>填写Group、Artifact</li>
-<li>点击Web,开启Web功能</li>
-<li>Finish</li>
-</ul>
-<p>(开发工具默认使用IDEA,JDK1.8+,Mavan3.0+)</p>
-<p>pom.xml : 依赖文件，项目基本框架以及后续框架注入都在这里配置</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;project xmlns=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">	xsi:schemaLocation=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span><br><span class="line">	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">	&lt;groupId&gt;com.example&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;salesforcedemo&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">	&lt;packaging&gt;jar&lt;/packaging&gt;</span><br><span class="line"></span><br><span class="line">	&lt;name&gt;salesforcedemo&lt;/name&gt;</span><br><span class="line">	&lt;description&gt;Demo project for Spring Boot&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">	&lt;parent&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;2.0.3.RELEASE&lt;/version&gt;</span><br><span class="line">		&lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">	&lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">	&lt;properties&gt;</span><br><span class="line">		&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">		&lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">		&lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">	&lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">	&lt;!-- 依赖框架添加 --&gt;</span><br><span class="line">	&lt;dependencies&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">			&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">	&lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">	&lt;build&gt;</span><br><span class="line">		&lt;plugins&gt;</span><br><span class="line">			&lt;plugin&gt;</span><br><span class="line">				&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">				&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">			&lt;/plugin&gt;</span><br><span class="line">		&lt;/plugins&gt;</span><br><span class="line">	&lt;/build&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<p>工程目录下的resources文件夹为Web端文件:</p>
+<h3 id="二-创建项目"><a href="#二-创建项目" class="headerlink" title="二.创建项目"></a>二.创建项目</h3><p>上一章<a href="http://www.leason.top/2018/07/17/SpringBoot-一-：创建第一个工程/">SpringBoot(一)：创建第一个工程</a>已经讲了如何快速的创建一个工程，基础配置同上。</p>
+<p>项目配置好后，创建一个bean类，名字随意。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Greeting</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String content;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Greeting</span><span class="params">(<span class="keyword">long</span> id, String content)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.content = content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getContent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> content;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建Controller类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String template = <span class="string">"hello,%s!"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> AtomicLong counter = <span class="keyword">new</span> AtomicLong();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/greeting"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Greeting <span class="title">greeting</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>, defaultValue = <span class="string">"World"</span>)</span> String name) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Greeting(counter.incrementAndGet(),</span><br><span class="line">                String.format(template, name));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>static: 静态资源</p>
+<li><p><code>@RestController</code> 是<code>@ResponseBody</code>和<code>@Controller</code>的组合注解,可以直接返回json。</p>
 </li>
-<li><p>templates: 网页资源</p>
+<li><p><code>@RequestMapping</code> 是一个用来处理请求地址映射的注解，可用于类或方法上。表示该类或者方法中的的响应请求都是以该地址作为父路径。在上面没有指定GET、PUT、POST等等，是因为<code>@RequestMapping</code>默认情况下是映射所有HTTP操作的，当然也可以使用<code>@RequestMapping(method=GET)</code>来指定是哪种请求。</p>
 </li>
-<li><p>application.properties：配置文件</p>
-</li>
-</ul>
-<p>看看项目根目录的Application文件：</p>
-<p><code>@SpringBootApplication</code>是一个便利的注释，它添加了以下所有内容：</p>
-<ul>
-<li><p><code>@Configuration</code> 将类标记为应用程序上下文的bean定义的源</p>
-</li>
-<li><p><code>@EnableAutoConfiguration</code> 告诉Spring Boot开始根据类路径设置，添加其他bean和各种属性设置</p>
-</li>
-<li><p>在使用Spring MVC应用程序时，通常你会添加<code>@EnableWebMvc</code>，但Spring Boot会在类路径上看到spring-webmvc时自动添加，这会将应用程序标记为Web应用程序，并激活关键行为，比如设置 <code>DispatcherServlet</code></p>
-</li>
-<li><p><code>@ComponentScan</code> 告诉Spring在包中寻找其他组件，配置和服务，允许它找到控制器</p>
-</li>
-<li><p>main()方法使用Spring Boot的SpringApplication.run()方法来启动应用程序。你是否注意到没有一行XML？也没有web.xml文件。此Web应用程序是100％纯Java，无需进行任何初级配置</p>
+<li><p><code>@RequestParam</code> 将查询字符串参数的值绑定到greeting()方法的name参数中,如果请求中不存在name参数，就默认使用“World”。</p>
 </li>
 </ul>
-<h3 id="三-Hello-SpringBoot"><a href="#三-Hello-SpringBoot" class="headerlink" title="三.Hello SpringBoot"></a>三.Hello SpringBoot</h3><p>新建Controller类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello SpringBoot!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行程序，打开浏览器访问localhost:8080，即可显示：</p>
-<blockquote>
-<p>Hello SpringBoot! </p>
-</blockquote>
-<h3 id="四-单元测试"><a href="#四-单元测试" class="headerlink" title="四.单元测试"></a>四.单元测试</h3><p>可以使用Spring Boot编写一个非常简单的全栈集成测试，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span>(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloControllerIT</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@LocalServerPort</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> port;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> URL base;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TestRestTemplate template;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.base = <span class="keyword">new</span> URL(<span class="string">"http://localhost:"</span> + port + <span class="string">"/"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getHello</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ResponseEntity&lt;String&gt; response = template.getForEntity(base.toString(),</span><br><span class="line">                String.class);</span><br><span class="line">        assertThat(response.getBody(), equalTo(<span class="string">"Greetings from Spring Boot!"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">assertThat</span><span class="params">(String body, Matcher&lt;String&gt; stringMatcher)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//.......</span></span><br><span class="line">    </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过<code>webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT</code>嵌入服务先在随机端口上启动，然后运行时调用<code>@LocalServerPort</code>发现实际端口。</p>
-<h3 id="五-总结"><a href="#五-总结" class="headerlink" title="五.总结"></a>五.总结</h3><p>可以看到，不需要进行多余的其它配置，web.xml不需要，tomact内嵌有，整个项目从开始构建到运行不会超过5分钟。</p>
+<h3 id="三-测试服务"><a href="#三-测试服务" class="headerlink" title="三.测试服务"></a>三.测试服务</h3><p>启动服务，访问http：// localhost：8080 / greeting，其中显示：</p>
+<div class="note class_name"><p>{“id”:1,”content”:”hello, World!”} </p></div>
+
+使用http：// localhost：8080 / greeting？name = Leason,提供查询字符串参数：
+
+<div class="note class_name"><p>{“id”:2,”content”:”hello,Leason!”} </p></div>
+<h3 id="四-请求第三方接口"><a href="#四-请求第三方接口" class="headerlink" title="四.请求第三方接口"></a>四.请求第三方接口</h3><p>使用SpringBoot提供<a href="https://gturnquist-quoters.cfapps.io/api/random" target="_blank" rel="noopener">https://gturnquist-quoters.cfapps.io/api/random</a> 的接口。</p>
+<p>创建一个实体类：Quote</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Quote</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String type;</span><br><span class="line">    <span class="keyword">private</span> Object value;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Quote</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setType</span><span class="params">(String type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.type = type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(Object value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Quote&#123;"</span> +</span><br><span class="line">                <span class="string">"type='"</span> + type + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", value="</span> + value +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在我们之前创建的Controller类中，新建地址映射:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/quote"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    RestTemplate restTemplate = <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    Quote quote = restTemplate.getForObject(<span class="string">"http://gturnquist-quoters.cfapps.io/api/random"</span>, Quote.class);</span><br><span class="line">    <span class="keyword">return</span> quote.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后访问<a href="http://localhost:8080/quote" target="_blank" rel="noopener">http://localhost:8080/quote</a> ，即可看到我们请求的结果</p>
+<div class="note class_name"><p>Quote{type=’success’, value={id=6, quote=It embraces convention over configuration, providing an experience on par with frameworks that excel at early stage development, such as Ruby on Rails.}} </p></div>
+<p>这是主动调用得到的，如果需要程序自动请求并展示呢？可以使用Spring Boot来管理应用程序生命周期，找到根目录的Application文件，在其中配置<code>RestTemplate</code>，同时将它放到<code>CommandLineRunner</code>的回调中，以便在启动时由SpringBoot执行，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//用于打印结果</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger log = LoggerFactory.getLogger(Application.class);</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">(RestTemplateBuilder builder)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> builder.build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CommandLineRunner <span class="title">run</span><span class="params">(RestTemplate restTemplate)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> args -&gt; &#123;</span><br><span class="line">		Quote quote = restTemplate.getForObject(</span><br><span class="line">				<span class="string">"http://gturnquist-quoters.cfapps.io/api/random"</span>, Quote.class);</span><br><span class="line">		log.info(quote.toString());</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，我们在运行程序的时候，就可以看到请求的结果(为了方便，就直接输出到console界面了)：</p>
+<p>2018-07-26 12:15:25.756  INFO 7260 — [           main] javafx.application.Application           : Quote{type=’success’, value={id=6, quote=It embraces convention over configuration, providing an experience on par with frameworks that excel at early stage development, such as Ruby on Rails.}}</p>
+<h3 id="五-总结"><a href="#五-总结" class="headerlink" title="五.总结"></a>五.总结</h3><p>SpringBoot的所有功能模块用起来都很方便配置，且并不仅仅局限于客户端的开发，也可以用于编写接口供其它程序使用。举个例子：有个需求是在一个页面做个定时任务，请其它3个系统的最新消息。则可以把请求这一步放到SpringBoot服务里来做，提供redis缓存，在需求页面上则每次只需调一个接口就行。</p>
 <p><a href="https://github.com/boomclub/SpringBoot-Introduction" target="_blank" rel="noopener"><strong>点击查看源码</strong></a></p>
 <p><strong><code>参考资料</code></strong>：</p>
 <ul>
-<li><a href="https://spring.io/guides/gs/spring-boot/" target="_blank" rel="noopener">https://spring.io/guides/gs/spring-boot/</a> </li>
+<li><a href="https://spring.io/guides/gs/consuming-rest/" target="_blank" rel="noopener">https://spring.io/guides/gs/consuming-rest/</a></li>
+<li><a href="https://spring.io/guides/gs/rest-service/" target="_blank" rel="noopener">https://spring.io/guides/gs/rest-service/</a></li>
 </ul>
 
       
@@ -468,7 +456,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.leason.top/2018/07/17/SpringBoot-一-：创建第一个工程/" title="SpringBoot(一)：创建第一个工程">http://www.leason.top/2018/07/17/SpringBoot-一-：创建第一个工程/</a>
+    <a href="http://www.leason.top/2018/07/25/SpringBoot-二-：构建RESTful Web服务/" title="SpringBoot(二)：构建RESTful Web服务">http://www.leason.top/2018/07/25/SpringBoot-二-：构建RESTful Web服务/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -498,8 +486,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/19/四月/" rel="next" title="四月">
-                <i class="fa fa-chevron-left"></i> 四月
+              <a href="/2018/07/17/SpringBoot-一-：创建第一个工程/" rel="next" title="SpringBoot(一)：创建第一个工程">
+                <i class="fa fa-chevron-left"></i> SpringBoot(一)：创建第一个工程
               </a>
             
           </div>
@@ -507,10 +495,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/25/SpringBoot-二-：构建RESTful Web服务/" rel="prev" title="SpringBoot(二)：构建RESTful Web服务">
-                SpringBoot(二)：构建RESTful Web服务 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -659,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-简介"><span class="nav-text">一.简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-创建工程"><span class="nav-text">二.创建工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-Hello-SpringBoot"><span class="nav-text">三.Hello SpringBoot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-单元测试"><span class="nav-text">四.单元测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-总结"><span class="nav-text">五.总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-目的"><span class="nav-text">一.目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-创建项目"><span class="nav-text">二.创建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-测试服务"><span class="nav-text">三.测试服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-请求第三方接口"><span class="nav-text">四.请求第三方接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-总结"><span class="nav-text">五.总结</span></a></li></ol></div>
             
 
           </div>
