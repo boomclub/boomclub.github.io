@@ -92,17 +92,10 @@
 <meta property="og:site_name" content="Leason&#39;s Blog">
 <meta property="og:description" content="前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。 庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E4%BA%A7%E5%93%81.png">
-<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/App%E8%AF%A6%E6%83%85.png">
-<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E8%A1%A5%E4%B8%81.png">
-<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC.png">
-<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%97%A7%E7%89%88.png">
-<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%96%B0%E7%89%88.png">
-<meta property="og:updated_time" content="2018-03-07T05:16:50.992Z">
+<meta property="og:updated_time" content="2019-01-25T03:18:15.922Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sophix Demo-Android热更新">
 <meta name="twitter:description" content="前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。 庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。">
-<meta name="twitter:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E4%BA%A7%E5%93%81.png">
 
 
 
@@ -389,9 +382,7 @@
 <p>庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。</p>
 <a id="more"></a>
 <h3 id="一-控制台申请"><a href="#一-控制台申请" class="headerlink" title="一.控制台申请"></a>一.控制台申请</h3><p>登录阿里云控制台开通移动热修复服务，然后创建App。</p>
-<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E4%BA%A7%E5%93%81.png" alt=""></p>
 <p>在控制台找到你刚刚创建的App，点击管理即可查看详细信息</p>
-<p><img src="http://p1ns9jwhz.bkt.clouddn.com/App%E8%AF%A6%E6%83%85.png" alt=""></p>
 <p>这里的AppId，AppSecret，RSA密钥是后面我们程序中需要用到的。</p>
 <h3 id="二-集成"><a href="#二-集成" class="headerlink" title="二.集成"></a>二.集成</h3><h4 id="1-Android-stuido"><a href="#1-Android-stuido" class="headerlink" title="1.Android stuido"></a>1.Android stuido</h4><p>Android stuido采用gradle远程仓库依赖, 打开项目找到app的build.gradle文件，添加如下配置：</p>
 <p>添加maven仓库地址：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    maven &#123;</span><br><span class="line">        url <span class="string">"http://maven.aliyun.com/nexus/content/repositories/releases"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -412,12 +403,8 @@
 <h3 id="三-Demo测试"><a href="#三-Demo测试" class="headerlink" title="三.Demo测试"></a>三.Demo测试</h3><h4 id="1-生成差量补丁"><a href="#1-生成差量补丁" class="headerlink" title="1.生成差量补丁"></a>1.生成差量补丁</h4><p>创建应用，添加TextView控件，进行第一次签名打包作为旧版：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.txt);</span><br><span class="line">        textView.setText(<span class="string">"旧版显示内容"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>然后对代码进行调整，进行第二次打包作为新版：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.txt);</span><br><span class="line">        textView.setText(<span class="string">"我是新版显示内容"</span>);</span><br><span class="line">        Toast.makeText(<span class="keyword">this</span>,<span class="string">"补丁更新成功"</span>,Toast.LENGTH_LONG).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>下载阿里的<a href="https://help.aliyun.com/document_detail/53247.html?spm=5176.doc53240.6.548.Wv0ck6" target="_blank" rel="noopener">SophixPatch Tool</a>打补丁工具，在设置中进行补丁的输出路径和其它参数配置，然后生成补丁即可。</p>
-<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E8%A1%A5%E4%B8%81.png" alt=""></p>
 <h4 id="2-上传补丁"><a href="#2-上传补丁" class="headerlink" title="2.上传补丁"></a>2.上传补丁</h4><p>找到你添加的应用，点击管理，然后添加版本（<code>这里的版本号对应的是当前投入使用的应用版本号，必须一致</code>）。</p>
-<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC.png" alt=""></p>
 <p>然后在详情界面上传补丁，这里只是测试就不进行灰度，直接全量发布。</p>
-<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%97%A7%E7%89%88.png" style="zoom:50%"></p>
-<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%96%B0%E7%89%88.png" style="zoom:50%"></p>
 <p>搞定！</p>
 <h3 id="四-总结"><a href="#四-总结" class="headerlink" title="四.总结"></a>四.总结</h3><p>Sophix相比其它的热更新框架来说，集成很简单，完全是傻瓜式接入，不需要配置各种繁琐的参数。</p>
 
