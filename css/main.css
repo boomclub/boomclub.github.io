@@ -1935,7 +1935,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #40d4ff;
+  background: #96ff5b;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3095,12 +3095,5 @@ img:hover {
 @media (max-width: 767px) {
   .post-body {
     text-align: justify;
-  }
-}
-@media screen and (min-width: 1200px) {
-  body {
-    background: url("https://source.unsplash.com/random/1920x1080");
-    background-attachment: fixed;
-    background-position: 50% 50%;
   }
 }
