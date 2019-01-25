@@ -1,4 +1,1004 @@
-<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><script src="/lib/pace/pace.min.js?v=1.0.2"></script><link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css"><link rel="icon" type="image/png" sizes="32x32" href="/images/lss.png?v=5.1.3"><link rel="icon" type="image/png" sizes="16x16" href="/images/lss.png?v=5.1.3"><meta name="keywords" content="Android,热更新,"><link rel="alternate" href="/atom.xml" title="Leason's Blog" type="application/atom+xml"><meta name="description" content="前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。 庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。"><meta name="keywords" content="Android,热更新"><meta property="og:type" content="article"><meta property="og:title" content="Sophix Demo-Android热更新"><meta property="og:url" content="http://www.leason.top/2018/03/07/Sophix-Demo/index.html"><meta property="og:site_name" content="Leason&#39;s Blog"><meta property="og:description" content="前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。 庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E4%BA%A7%E5%93%81.png"><meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/App%E8%AF%A6%E6%83%85.png"><meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E8%A1%A5%E4%B8%81.png"><meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC.png"><meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%97%A7%E7%89%88.png"><meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%96%B0%E7%89%88.png"><meta property="og:updated_time" content="2018-03-07T05:16:50.992Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Sophix Demo-Android热更新"><meta name="twitter:description" content="前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。 庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。"><meta name="twitter:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E4%BA%A7%E5%93%81.png"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"5.1.3",sidebar:{position:"left",display:"hide",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="http://www.leason.top/2018/03/07/Sophix-Demo/"><title>Sophix Demo-Android热更新 | Leason's Blog</title><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?54e6baee06451ba85d4c15e0bb37e425";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Leason's Blog</span><span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description">All is flux,nothing stays still</h1></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> 标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li></ul></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://www.leason.top/2018/03/07/Sophix-Demo/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Leason"><meta itemprop="description" content=""><meta itemprop="image" content="/images/pics.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Leason's Blog"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">Sophix Demo-Android热更新</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-07T12:08:00+08:00">2018-03-07</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span></span> <span id="/2018/03/07/Sophix-Demo/" class="leancloud_visitors" data-flag-title="Sophix Demo-Android热更新"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数&#58;</span><span class="leancloud-visitors-count"></span></span></div></header><div class="post-body" itemprop="articleBody"><p>前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。</p><p>庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。</p><a id="more"></a><h3 id="一-控制台申请"><a href="#一-控制台申请" class="headerlink" title="一.控制台申请"></a>一.控制台申请</h3><p>登录阿里云控制台开通移动热修复服务，然后创建App。</p><p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E4%BA%A7%E5%93%81.png" alt=""></p><p>在控制台找到你刚刚创建的App，点击管理即可查看详细信息</p><p><img src="http://p1ns9jwhz.bkt.clouddn.com/App%E8%AF%A6%E6%83%85.png" alt=""></p><p>这里的AppId，AppSecret，RSA密钥是后面我们程序中需要用到的。</p><h3 id="二-集成"><a href="#二-集成" class="headerlink" title="二.集成"></a>二.集成</h3><h4 id="1-Android-stuido"><a href="#1-Android-stuido" class="headerlink" title="1.Android stuido"></a>1.Android stuido</h4><p>Android stuido采用gradle远程仓库依赖, 打开项目找到app的build.gradle文件，添加如下配置：</p><p>添加maven仓库地址：<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    maven &#123;</span><br><span class="line">        url <span class="string">"http://maven.aliyun.com/nexus/content/repositories/releases"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><p>添加gradle坐标版本依赖：<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    maven &#123;</span><br><span class="line">        compile <span class="string">'com.aliyun.ams:alicloud-android-hotfix:3.2.0'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><h4 id="2-eclipse"><a href="#2-eclipse" class="headerlink" title="2.eclipse"></a>2.eclipse</h4><ul><li>下载OneSDk.zip，解压出hotfix_core-release.aar文件后再解压这个aar文件</li><li>复制解压文件jni目录下的libsophix.so到自己的jni目录下, eclipse jni目录一般指的就是项目libs目录</li><li>复制utdid4all-1.1.5.3_proguard.jar和alicloud-android-utils-1.0.3.jar文件到项目libs目录下</li><li>重命名classes.jar为sophix.jar并复制到项目libs目录下</li><li>合并AndroidManifest.xml文件中的内容到本项目AndroidManifest.xml文件<br>（编译期间报utdid类重复异常, 那么步骤2中添加的utdid4all-1.1.5.3_proguard.jar从项目libs目录移除即可）</li></ul><h4 id="3-添加权限"><a href="#3-添加权限" class="headerlink" title="3.添加权限"></a>3.添加权限</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;! -- 网络权限 --&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;</span><br><span class="line">&lt;! -- 外部存储读权限，调试工具加载本地补丁需要 --&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.READ_EXTERNAL_STORAGE"</span>/&gt;</span><br></pre></td></tr></table></figure><p>READ_EXTERNAL_STORAGE权限属于Dangerous Permissions，仅调试工具获取外部补丁需要，不影响线上发布的补丁加载，调试时请自行做好android6.0以上的运行时权限获取。</p><h4 id="4-SDK接口接入"><a href="#4-SDK接口接入" class="headerlink" title="4.SDK接口接入"></a>4.SDK接口接入</h4><p>必须在<code>Application.attachBaseContext()</code>或者<code>Application.onCreate()</code>的最开始进行SDK初始化操作。<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// initialize最好放在attachBaseContext最前面，初始化直接在Application类里面，切勿封装到其他类</span></span><br><span class="line">        SophixManager.getInstance().setContext(<span class="keyword">this</span>)</span><br><span class="line">                .setAppVersion(appVersion)</span><br><span class="line">                .setAesKey(<span class="keyword">null</span>)</span><br><span class="line">                .setEnableDebug(<span class="keyword">true</span>)</span><br><span class="line">                .setSecretMetaData(<span class="string">"idSecret"</span>,<span class="string">"appSecret"</span>,<span class="string">"rsaSecret"</span>)</span><br><span class="line">                .setPatchLoadStatusStub(<span class="keyword">new</span> PatchLoadStatusListener() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoad</span><span class="params">(<span class="keyword">int</span> mode, <span class="keyword">int</span> code, String info, <span class="keyword">int</span> handlePatchVersion)</span> </span>&#123;</span><br><span class="line">                        <span class="comment">// 补丁加载回调通知</span></span><br><span class="line">                        <span class="keyword">if</span> (code == PatchStatus.CODE_DOWNLOAD_SUCCESS) &#123;</span><br><span class="line">                            <span class="comment">// 表明补丁加载成功</span></span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (code == PatchStatus.CODE_LOAD_RELAUNCH) &#123;</span><br><span class="line">                            <span class="comment">// 表明新补丁生效需要重启. 开发者可提示用户或者强制重启</span></span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">// 其它错误信息, 查看PatchStatus类说明</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;).initialize();</span><br><span class="line">        <span class="comment">// queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限。</span></span><br><span class="line">        SophixManager.getInstance().queryAndLoadNewPatch();</span><br></pre></td></tr></table></figure><p></p><ul><li>setSecretMetaData(idSecret, appSecret, rsaSecret): 三个参数是在阿里云控制台，移动热修复中申请得到的。</li></ul><h3 id="三-Demo测试"><a href="#三-Demo测试" class="headerlink" title="三.Demo测试"></a>三.Demo测试</h3><h4 id="1-生成差量补丁"><a href="#1-生成差量补丁" class="headerlink" title="1.生成差量补丁"></a>1.生成差量补丁</h4><p>创建应用，添加TextView控件，进行第一次签名打包作为旧版：<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.txt);</span><br><span class="line">        textView.setText(<span class="string">"旧版显示内容"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><p>然后对代码进行调整，进行第二次打包作为新版：<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.txt);</span><br><span class="line">        textView.setText(<span class="string">"我是新版显示内容"</span>);</span><br><span class="line">        Toast.makeText(<span class="keyword">this</span>,<span class="string">"补丁更新成功"</span>,Toast.LENGTH_LONG).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><p>下载阿里的<a href="https://help.aliyun.com/document_detail/53247.html?spm=5176.doc53240.6.548.Wv0ck6" target="_blank" rel="noopener">SophixPatch Tool</a>打补丁工具，在设置中进行补丁的输出路径和其它参数配置，然后生成补丁即可。</p><p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E8%A1%A5%E4%B8%81.png" alt=""></p><h4 id="2-上传补丁"><a href="#2-上传补丁" class="headerlink" title="2.上传补丁"></a>2.上传补丁</h4><p>找到你添加的应用，点击管理，然后添加版本（<code>这里的版本号对应的是当前投入使用的应用版本号，必须一致</code>）。</p><p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC.png" alt=""></p><p>然后在详情界面上传补丁，这里只是测试就不进行灰度，直接全量发布。</p><p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%97%A7%E7%89%88.png" style="zoom:50%"></p><p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%96%B0%E7%89%88.png" style="zoom:50%"></p><p>搞定！</p><h3 id="四-总结"><a href="#四-总结" class="headerlink" title="四.总结"></a>四.总结</h3><p>Sophix相比其它的热更新框架来说，集成很简单，完全是傻瓜式接入，不需要配置各种繁琐的参数。</p></div><div><ul class="post-copyright"><li class="post-copyright-author"> <strong>本文作者：</strong> Leason</li><li class="post-copyright-link"> <strong>本文链接：</strong> <a href="http://www.leason.top/2018/03/07/Sophix-Demo/" title="Sophix Demo-Android热更新">http://www.leason.top/2018/03/07/Sophix-Demo/</a></li><li class="post-copyright-license"> <strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a><a href="/tags/热更新/" rel="tag"><i class="fa fa-tag"></i> 热更新</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2018/02/27/飞蛾的哲学/" rel="next" title="飞蛾的哲学"><i class="fa fa-chevron-left"></i> 飞蛾的哲学</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/2018/03/12/ASP调用WebService服务接口/" rel="prev" title="ASP调用WebService服务接口">ASP调用WebService服务接口<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div><div class="comments" id="comments"><div id="lv-container" data-id="city" data-uid="MTAyMC8zMjMyMC84ODgx"></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/pics.jpg" alt="Leason"><p class="site-author-name" itemprop="name">Leason</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">11</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">5</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">12</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-控制台申请"><span class="nav-text">一.控制台申请</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-集成"><span class="nav-text">二.集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Android-stuido"><span class="nav-text">1.Android stuido</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-eclipse"><span class="nav-text">2.eclipse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-添加权限"><span class="nav-text">3.添加权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-SDK接口接入"><span class="nav-text">4.SDK接口接入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-Demo测试"><span class="nav-text">三.Demo测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-生成差量补丁"><span class="nav-text">1.生成差量补丁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-上传补丁"><span class="nav-text">2.上传补丁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-总结"><span class="nav-text">四.总结</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2018</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">Leason</span></div><div class="footer-custom">Hosted by <a target="_blank" href="https://pages.coding.me">Coding Pages</a></div><div class="busuanzi-count"><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="site-uv"><i class="fa fa-user-md"></i> &nbsp;访客数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人</span><span class="site-pv"><i class="fa fa-eye"></i> &nbsp;总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script><script type="text/javascript">!function(e,t){var n,c=e.getElementsByTagName(t)[0];"function"!=typeof LivereTower&&((n=e.createElement(t)).src="https://cdn-city.livere.com/js/embed.dist.js",n.async=!0,c.parentNode.insertBefore(n,c))}(document,"script")</script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("HmQr5iz8kGMSFbKtjyaPuBdg-gzGzoHsz","Ycjo961z6c7zMzEOnW48915E")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script><div id="hexo-helper-live2d"><canvas id="live2dcanvas" width="150" height="300"></canvas></div><style>#live2dcanvas{position:fixed;width:150px;height:300px;opacity:.7;right:0;z-index:999;pointer-events:none;bottom:-20px}</style><script type="text/javascript" src="/live2d/device.min.js"></script><script type="text/javascript">
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/lss.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/lss.png?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="Android,热更新," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Leason's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。 庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。">
+<meta name="keywords" content="Android,热更新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sophix Demo-Android热更新">
+<meta property="og:url" content="http://www.leason.top/2018/03/07/Sophix-Demo/index.html">
+<meta property="og:site_name" content="Leason&#39;s Blog">
+<meta property="og:description" content="前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。 庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E4%BA%A7%E5%93%81.png">
+<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/App%E8%AF%A6%E6%83%85.png">
+<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E8%A1%A5%E4%B8%81.png">
+<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC.png">
+<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%97%A7%E7%89%88.png">
+<meta property="og:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%96%B0%E7%89%88.png">
+<meta property="og:updated_time" content="2018-03-07T05:16:50.992Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sophix Demo-Android热更新">
+<meta name="twitter:description" content="前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。 庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。">
+<meta name="twitter:image" content="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E4%BA%A7%E5%93%81.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.leason.top/2018/03/07/Sophix-Demo/"/>
+
+
+
+
+
+  <title>Sophix Demo-Android热更新 | Leason's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?54e6baee06451ba85d4c15e0bb37e425";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Leason's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">All is flux,nothing stays still</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.leason.top/2018/03/07/Sophix-Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leason">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pics.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leason's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Sophix Demo-Android热更新</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-07T12:08:00+08:00">
+                2018-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/07/Sophix-Demo/" class="leancloud_visitors" data-flag-title="Sophix Demo-Android热更新">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前段时间，苹果禁止了iOS的热修复功能，几个做iOS开发的朋友都苦不堪言，一旦遇到重要更新就需要全量发布，无法进行灰度，这就导致如果更新出现问题，就会变得十分麻烦，影响范围会很广。</p>
+<p>庆幸的是Android尚未受到任何影响，目前的Android热更新基本上是采用底层替换或者是类加载，Sophix则把这两者进行了结合， Sophix 3.0也已上线，接入和使用非常简单。</p>
+<a id="more"></a>
+<h3 id="一-控制台申请"><a href="#一-控制台申请" class="headerlink" title="一.控制台申请"></a>一.控制台申请</h3><p>登录阿里云控制台开通移动热修复服务，然后创建App。</p>
+<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E4%BA%A7%E5%93%81.png" alt=""></p>
+<p>在控制台找到你刚刚创建的App，点击管理即可查看详细信息</p>
+<p><img src="http://p1ns9jwhz.bkt.clouddn.com/App%E8%AF%A6%E6%83%85.png" alt=""></p>
+<p>这里的AppId，AppSecret，RSA密钥是后面我们程序中需要用到的。</p>
+<h3 id="二-集成"><a href="#二-集成" class="headerlink" title="二.集成"></a>二.集成</h3><h4 id="1-Android-stuido"><a href="#1-Android-stuido" class="headerlink" title="1.Android stuido"></a>1.Android stuido</h4><p>Android stuido采用gradle远程仓库依赖, 打开项目找到app的build.gradle文件，添加如下配置：</p>
+<p>添加maven仓库地址：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    maven &#123;</span><br><span class="line">        url <span class="string">"http://maven.aliyun.com/nexus/content/repositories/releases"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>添加gradle坐标版本依赖：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    maven &#123;</span><br><span class="line">        compile <span class="string">'com.aliyun.ams:alicloud-android-hotfix:3.2.0'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-eclipse"><a href="#2-eclipse" class="headerlink" title="2.eclipse"></a>2.eclipse</h4><ul>
+<li>下载OneSDk.zip，解压出hotfix_core-release.aar文件后再解压这个aar文件</li>
+<li>复制解压文件jni目录下的libsophix.so到自己的jni目录下, eclipse jni目录一般指的就是项目libs目录</li>
+<li>复制utdid4all-1.1.5.3_proguard.jar和alicloud-android-utils-1.0.3.jar文件到项目libs目录下</li>
+<li>重命名classes.jar为sophix.jar并复制到项目libs目录下</li>
+<li>合并AndroidManifest.xml文件中的内容到本项目AndroidManifest.xml文件<br>（编译期间报utdid类重复异常, 那么步骤2中添加的utdid4all-1.1.5.3_proguard.jar从项目libs目录移除即可）</li>
+</ul>
+<h4 id="3-添加权限"><a href="#3-添加权限" class="headerlink" title="3.添加权限"></a>3.添加权限</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;! -- 网络权限 --&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;</span><br><span class="line">&lt;! -- 外部存储读权限，调试工具加载本地补丁需要 --&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.READ_EXTERNAL_STORAGE"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>READ_EXTERNAL_STORAGE权限属于Dangerous Permissions，仅调试工具获取外部补丁需要，不影响线上发布的补丁加载，调试时请自行做好android6.0以上的运行时权限获取。</p>
+<h4 id="4-SDK接口接入"><a href="#4-SDK接口接入" class="headerlink" title="4.SDK接口接入"></a>4.SDK接口接入</h4><p>必须在<code>Application.attachBaseContext()</code>或者<code>Application.onCreate()</code>的最开始进行SDK初始化操作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// initialize最好放在attachBaseContext最前面，初始化直接在Application类里面，切勿封装到其他类</span></span><br><span class="line">        SophixManager.getInstance().setContext(<span class="keyword">this</span>)</span><br><span class="line">                .setAppVersion(appVersion)</span><br><span class="line">                .setAesKey(<span class="keyword">null</span>)</span><br><span class="line">                .setEnableDebug(<span class="keyword">true</span>)</span><br><span class="line">                .setSecretMetaData(<span class="string">"idSecret"</span>,<span class="string">"appSecret"</span>,<span class="string">"rsaSecret"</span>)</span><br><span class="line">                .setPatchLoadStatusStub(<span class="keyword">new</span> PatchLoadStatusListener() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoad</span><span class="params">(<span class="keyword">int</span> mode, <span class="keyword">int</span> code, String info, <span class="keyword">int</span> handlePatchVersion)</span> </span>&#123;</span><br><span class="line">                        <span class="comment">// 补丁加载回调通知</span></span><br><span class="line">                        <span class="keyword">if</span> (code == PatchStatus.CODE_DOWNLOAD_SUCCESS) &#123;</span><br><span class="line">                            <span class="comment">// 表明补丁加载成功</span></span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (code == PatchStatus.CODE_LOAD_RELAUNCH) &#123;</span><br><span class="line">                            <span class="comment">// 表明新补丁生效需要重启. 开发者可提示用户或者强制重启</span></span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">// 其它错误信息, 查看PatchStatus类说明</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;).initialize();</span><br><span class="line">        <span class="comment">// queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限。</span></span><br><span class="line">        SophixManager.getInstance().queryAndLoadNewPatch();</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>setSecretMetaData(idSecret, appSecret, rsaSecret): 三个参数是在阿里云控制台，移动热修复中申请得到的。</li>
+</ul>
+<h3 id="三-Demo测试"><a href="#三-Demo测试" class="headerlink" title="三.Demo测试"></a>三.Demo测试</h3><h4 id="1-生成差量补丁"><a href="#1-生成差量补丁" class="headerlink" title="1.生成差量补丁"></a>1.生成差量补丁</h4><p>创建应用，添加TextView控件，进行第一次签名打包作为旧版：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.txt);</span><br><span class="line">        textView.setText(<span class="string">"旧版显示内容"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后对代码进行调整，进行第二次打包作为新版：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.txt);</span><br><span class="line">        textView.setText(<span class="string">"我是新版显示内容"</span>);</span><br><span class="line">        Toast.makeText(<span class="keyword">this</span>,<span class="string">"补丁更新成功"</span>,Toast.LENGTH_LONG).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下载阿里的<a href="https://help.aliyun.com/document_detail/53247.html?spm=5176.doc53240.6.548.Wv0ck6" target="_blank" rel="noopener">SophixPatch Tool</a>打补丁工具，在设置中进行补丁的输出路径和其它参数配置，然后生成补丁即可。</p>
+<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E8%A1%A5%E4%B8%81.png" alt=""></p>
+<h4 id="2-上传补丁"><a href="#2-上传补丁" class="headerlink" title="2.上传补丁"></a>2.上传补丁</h4><p>找到你添加的应用，点击管理，然后添加版本（<code>这里的版本号对应的是当前投入使用的应用版本号，必须一致</code>）。</p>
+<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC.png" alt=""></p>
+<p>然后在详情界面上传补丁，这里只是测试就不进行灰度，直接全量发布。</p>
+<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%97%A7%E7%89%88.png" style="zoom:50%"></p>
+<p><img src="http://p1ns9jwhz.bkt.clouddn.com/%E6%96%B0%E7%89%88.png" style="zoom:50%"></p>
+<p>搞定！</p>
+<h3 id="四-总结"><a href="#四-总结" class="headerlink" title="四.总结"></a>四.总结</h3><p>Sophix相比其它的热更新框架来说，集成很简单，完全是傻瓜式接入，不需要配置各种繁琐的参数。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Leason
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.leason.top/2018/03/07/Sophix-Demo/" title="Sophix Demo-Android热更新">http://www.leason.top/2018/03/07/Sophix-Demo/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
+          
+            <a href="/tags/热更新/" rel="tag"><i class="fa fa-tag"></i> 热更新</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/27/飞蛾的哲学/" rel="next" title="飞蛾的哲学">
+                <i class="fa fa-chevron-left"></i> 飞蛾的哲学
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/12/ASP调用WebService服务接口/" rel="prev" title="ASP调用WebService服务接口">
+                ASP调用WebService服务接口 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjMyMC84ODgx"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pics.jpg"
+                alt="Leason" />
+            
+              <p class="site-author-name" itemprop="name">Leason</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+		  
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-控制台申请"><span class="nav-text">一.控制台申请</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-集成"><span class="nav-text">二.集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Android-stuido"><span class="nav-text">1.Android stuido</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-eclipse"><span class="nav-text">2.eclipse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-添加权限"><span class="nav-text">3.添加权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-SDK接口接入"><span class="nav-text">4.SDK接口接入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-Demo测试"><span class="nav-text">三.Demo测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-生成差量补丁"><span class="nav-text">1.生成差量补丁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-上传补丁"><span class="nav-text">2.上传补丁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-总结"><span class="nav-text">四.总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <!--<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leason</span>
+  
+</div>
+
+<!--
+  <div class="powered-by">
+	<p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+  </div>
+-->
+
+
+
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" href="https://pages.coding.me">Coding Pages</a></div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user-md"></i></i> &nbsp;访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> &nbsp;总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("HmQr5iz8kGMSFbKtjyaPuBdg-gzGzoHsz", "Ycjo961z6c7zMzEOnW48915E");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
 const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
 (function(){
   if((typeof(device) != 'undefined') && (device.mobile())){
@@ -9,4 +1009,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
     if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
   loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/wanko.model.json", 0.5);});
 })();
-</script></body></html>
+</script>
+
+</body>
+</html>
